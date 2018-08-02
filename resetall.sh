@@ -12,7 +12,7 @@ for f in /dev/bus/usb/*; do
         udevadm info --query=all --attribute-walk --name=$p | grep 'RealSense' &> /dev/null
         if [ $? == 0 ]; then
             echo $pass | sudo -S ./usbreset $p
-            echo "reset $bus $port with cpp ioctl"
+            echo " ::::: > reset $bus $port with cpp ioctl"
         fi
     done
 done
@@ -23,7 +23,7 @@ for f in /dev/bus/usb/*; do
         udevadm info --query=all --attribute-walk --name=$p | grep 'RealSense' &> /dev/null
         if [ $? == 0 ]; then
             echo $pass | sudo -S usb_modeswitch -v 0x8086 -p 0x0ad3 -b $bus -g $port -R
-            echo "reset $bus $port with usb_modeswitch"
+            echo " ::::: > reset $bus $port with usb_modeswitch"
         fi
     done
 done
@@ -34,11 +34,11 @@ for f in /dev/bus/usb/*; do
         udevadm info --query=all --attribute-walk --name=$p | grep 'RealSense' &> /dev/null
         if [ $? == 0 ]; then
             echo $pass | sudo -S usb_modeswitch -v 0x8086 -p 0x0ad3 -b $bus -g $port -d
-            echo "detach $bus $port with usb_modeswitch"
+            echo " ::::: > detach $bus $port with usb_modeswitch"
         fi
     done
 done
-echo "unload driver"
+echo " ::::: > unload driver"
 sudo rmmod uvcvideo
-echo "reload driver"
+echo " ::::: > reload driver"
 sudo modprobe uvcvideo
