@@ -11,6 +11,16 @@ for f in /dev/bus/usb/*; do
         port=$(basename $p)
         udevadm info --query=all --attribute-walk --name=$p | grep 'RealSense' &> /dev/null
         if [ $? == 0 ]; then
+            echo " ::::: > found camera at bus: $bus port: $port"
+        fi
+    done
+done
+for f in /dev/bus/usb/*; do
+    bus=$(basename $f)
+    for p in ${f}/*; do
+        port=$(basename $p)
+        udevadm info --query=all --attribute-walk --name=$p | grep 'RealSense' &> /dev/null
+        if [ $? == 0 ]; then
             echo $pass | sudo -S ./usbreset $p
             echo " ::::: > reset $bus $port with cpp ioctl"
         fi
@@ -42,3 +52,5 @@ echo " ::::: > unload driver"
 sudo rmmod uvcvideo
 echo " ::::: > reload driver"
 sudo modprobe uvcvideo
+echo " ::::: > temporarily unloading faulty camera"
+echo $pass | sudo -S usb_modeswitch -v 0x8086 -p 0x0ad3 -b 014 -g 004 -d
