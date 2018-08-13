@@ -53,4 +53,4 @@ sudo rmmod uvcvideo
 echo " ::::: > reload driver"
 sudo modprobe uvcvideo
 echo " ::::: > temporarily unloading faulty camera"
-echo $pass | sudo -S usb_modeswitch -v 0x8086 -p 0x0ad3 -b 014 -g 004 -d
+./detachSerial.sh 805513020060
