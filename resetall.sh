@@ -15,6 +15,9 @@ for f in /dev/bus/usb/*; do
         fi
     done
 done
+
+#echo "$1" >/sys/bus/usb/drivers/usb/bind
+
 for f in /dev/bus/usb/*; do
     bus=$(basename $f)
     for p in ${f}/*; do
@@ -50,7 +53,8 @@ for f in /dev/bus/usb/*; do
 done
 echo " ::::: > unload driver"
 sudo rmmod uvcvideo
+sleep 1
 echo " ::::: > reload driver"
 sudo modprobe uvcvideo
-echo " ::::: > temporarily unloading faulty camera"
-./detachSerial.sh 805513020060
+#echo " ::::: > temporarily unloading faulty camera"
+#./detachSerial.sh 805513020060
