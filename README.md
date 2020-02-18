@@ -13,7 +13,7 @@ studio       _       _
 # what is this for?
 Sometimes realsense camera's have to be unplugged
 and replugged. Often a reboot doesn't help.
-Maybe we're not even physically close to the machine.
+Maybe we're not even physically close to the machine and it's not possible to unplug and replug them manually.
 In these cases, we can run this script.
 
 It is tested on Ubuntu 16.04 and 18.04
