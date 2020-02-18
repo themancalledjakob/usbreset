@@ -1,9 +1,24 @@
 #!/bin/bash
-pass='pp'
-if [ $# -eq 1 ]
-  then
-    pass=$1
-fi
+#
+# studio       _       _
+#  _ __   ___ (_)_ __ | |_ ___ _ ____/\__
+# | '_ \ / _ \| | '_ \| __/ _ \ '__\    /
+# | |_) | (_) | | | | | ||  __/ |  /_  _\
+# | .__/ \___/|_|_| |_|\__\___|_|    \/
+# |_|
+#       presents: resetall.sh
+#
+# -------------
+# sometimes realsense camera's have to be unplugged
+# and replugged. Often a reboot doesn't help.
+# In these cases, we can run this script.
+#
+# Don't forget to run with sudo
+# if you need to run it unattended read the README.md
+#
+# studio@pointer.click
+#
+##################################################################
 ls /dev/bus/usb
 for f in /dev/bus/usb/*; do
     bus=$(basename $f)
@@ -15,16 +30,13 @@ for f in /dev/bus/usb/*; do
         fi
     done
 done
-
-#echo "$1" >/sys/bus/usb/drivers/usb/bind
-
 for f in /dev/bus/usb/*; do
     bus=$(basename $f)
     for p in ${f}/*; do
         port=$(basename $p)
         udevadm info --query=all --attribute-walk --name=$p | grep 'RealSense' &> /dev/null
         if [ $? == 0 ]; then
-            echo $pass | sudo -S ./usbreset $p
+            ./usbreset $p
             echo " ::::: > reset $bus $port with cpp ioctl"
         fi
     done
@@ -35,7 +47,7 @@ for f in /dev/bus/usb/*; do
         port=$(basename $p)
         udevadm info --query=all --attribute-walk --name=$p | grep 'RealSense' &> /dev/null
         if [ $? == 0 ]; then
-            echo $pass | sudo -S usb_modeswitch -v 0x8086 -p 0x0ad3 -b $bus -g $port -R
+            usb_modeswitch -v 0x8086 -p 0x0ad3 -b $bus -g $port -R
             echo " ::::: > reset $bus $port with usb_modeswitch"
         fi
     done
@@ -46,15 +58,15 @@ for f in /dev/bus/usb/*; do
         port=$(basename $p)
         udevadm info --query=all --attribute-walk --name=$p | grep 'RealSense' &> /dev/null
         if [ $? == 0 ]; then
-            echo $pass | sudo -S usb_modeswitch -v 0x8086 -p 0x0ad3 -b $bus -g $port -d
+            usb_modeswitch -v 0x8086 -p 0x0ad3 -b $bus -g $port -d
             echo " ::::: > detach $bus $port with usb_modeswitch"
         fi
     done
 done
 echo " ::::: > unload driver"
-sudo rmmod uvcvideo
+rmmod uvcvideo
 sleep 1
 echo " ::::: > reload driver"
-sudo modprobe uvcvideo
+modprobe uvcvideo
 #echo " ::::: > temporarily unloading faulty camera"
-#./detachSerial.sh 805513020060
+#./detachSerial.sh <serial>

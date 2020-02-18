@@ -1,12 +1,22 @@
-/* usbreset -- send a USB port reset to a USB device
+/*
+ * STUDIO       _       _
+ *  _ __   ___ (_)_ __ | |_ ___ _ ____/\__
+ * | '_ \ / _ \| | '_ \| __/ _ \ '__\    /
+ * | |_) | (_) | | | | | ||  __/ |  /_  _\
+ * | .__/ \___/|_|_| |_|\__\___|_|    \/
+ * |_|
+ *       presents: usbreset
+ *
+ * -------------
+ * send a USB port reset to a USB device
  *
  * Compile using: gcc -o usbreset usbreset.c
  *
+ * origin: https://marc.info/?l=linux-usb&m=121459435621262&w=2
+ *
+ * studio@pointer.click
  *
  * */
-
-
-
 
 #include <stdio.h>
 #include <unistd.h>
