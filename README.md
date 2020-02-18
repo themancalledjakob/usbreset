@@ -6,8 +6,6 @@ studio       _       _
 | .__/ \___/|_|_| |_|\__\___|_|    \/
 |_|
       presents: usbreset
-      
-      D O   N O T   U S E   B L I N D L Y
 
       studio@pointer.click
 ```
@@ -41,9 +39,6 @@ i believe it can be used for any usb device. didn't try though. You would have t
 # could I accidentially disable all usb ports and not have access via mouse and/or keyboard to the machine?
 yes absolutely. Usually this is solved with a reboot though.
 In any case **judge for yourself**, read the scripts and look up what the commands do. They're running with admin privileges so you should know what they're doing.
-
-# could these scripts somehow damage the cameras?
-No guarantees..
 
 # disclaimer
 USE ON YOUR OWN RISK. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER OR CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
